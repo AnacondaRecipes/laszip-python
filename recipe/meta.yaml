@@ -1,0 +1,53 @@
+{% set name = "laszip-python" %}
+{% set version = "0.2.3" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/tmontaigu/laszip-python/archive/refs/tags/{{ version }}.tar.gz
+  sha256: 31572639a928fabf7d60a340970c6ae256ae9382e0420e938d6ab237553ac57b
+
+build:
+  number: 0
+  script:
+    - export CMAKE_GENERATOR="Ninja"  # [not win]
+    - set CMAKE_GENERATOR="Ninja"  # [win]
+    - {{ PYTHON }} -m pip install . -v --no-deps --no-build-isolation
+  skip: true  # [py<37]
+  missing_dso_whitelist:  # [s390x]
+    - $RPATH/ld64.so.1    # [s390x]
+
+requirements:
+  build:
+    - {{ compiler('cxx') }}
+    - cmake
+    - ninja
+  host:
+    - pip
+    - python
+    - scikit-build-core
+    - pybind11 >=2.10
+    - laszip 3.4
+  run:
+    - python
+    - laszip 3.4
+
+test:
+  imports:
+    - laszip
+  commands:
+    - pip check
+  requires:
+    - pip
+
+about:
+  home: https://github.com/tmontaigu/laszip-python
+  summary: Python bindings for LASzip
+  description: Unofficial bindings between Python and LASzip made using pybind11.
+  license: MIT
+  license_family: MIT
+  license_file: License.txt
+  dev_url: https://github.com/tmontaigu/laszip-python
+  doc_url: https://github.com/tmontaigu/laszip-python

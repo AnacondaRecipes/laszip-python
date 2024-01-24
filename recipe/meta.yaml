@@ -31,7 +31,7 @@ requirements:
   host:
     - pip
     - python
-    - scikit-build-core
+    - scikit-build-core >=0.1.5
     - pybind11 >=2.10
     - laszip 3.4
   run:

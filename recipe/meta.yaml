@@ -16,7 +16,7 @@ build:
   script:
     - export CMAKE_GENERATOR="Ninja"  # [not win]
     - set CMAKE_GENERATOR="Ninja"  # [win]
-    - {{ PYTHON }} -m pip install . -v --no-deps --no-build-isolation
+    - {{ PYTHON }} -m pip install . -v --no-deps --no-build-isolation --config-settings cmake.build-type="Release"
   skip: true  # [py<37 or win]
   missing_dso_whitelist:  # [s390x]
     - $RPATH/ld64.so.1    # [s390x]

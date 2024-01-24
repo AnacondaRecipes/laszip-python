@@ -1,0 +1,34 @@
+From fe7a0da62661318779aa17226314724b6a441775 Mon Sep 17 00:00:00 2001
+From: Jean-Christophe Morin <jcmorin@anaconda.com>
+Date: Tue, 23 Jan 2024 17:21:29 -0500
+Subject: [PATCH] Add missing includes
+
+---
+ src/lasunzipper.cpp | 1 +
+ src/laszipper.cpp   | 1 +
+ 2 files changed, 2 insertions(+)
+
+diff --git a/src/lasunzipper.cpp b/src/lasunzipper.cpp
+index b51ac96..dceb02e 100644
+--- a/src/lasunzipper.cpp
++++ b/src/lasunzipper.cpp
+@@ -3,6 +3,7 @@
+ #include <laszip/laszip_api.h>
+ 
+ #include <algorithm>
++#include <limits>
+ 
+ LasUnZipper::LasUnZipper(py::object &file_obj) : LasUnZipper(file_obj, laszip_DECOMPRESS_SELECTIVE_ALL) {}
+ 
+diff --git a/src/laszipper.cpp b/src/laszipper.cpp
+index e481f5f..f44fd99 100644
+--- a/src/laszipper.cpp
++++ b/src/laszipper.cpp
+@@ -1,3 +1,4 @@
++#include <limits>
+ #include "laszipper.h"
+ 
+ #include "laszip_error.h"
+-- 
+2.43.0
+
